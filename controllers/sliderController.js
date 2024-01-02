@@ -1,8 +1,8 @@
 const slider = require('../models/slider');
 
 module.exports.insertSliderData = async (req, res) => {
-    console.log(req.file);
-    console.log(req.body);
+    // console.log(req.file);
+    // console.log(req.body);
     let imgPath = '';
     if (req.file) {
         imgPath = slider.sliderImgPath + "/" + req.file.filename;

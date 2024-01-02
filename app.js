@@ -1,17 +1,16 @@
 const express = require('express');
-const port = 8002;
+const port = process.env.PORT || 8002;
 const app = express();
 const path = require('path');
-// const db = require("./config/mongoose");
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-mongoose.connect(("mongodb+srv://dskathiriya:Dhruvil156@cluster0.q17dt2h.mongodb.net/Blog_Project"), {
+mongoose.connect(`mongodb+srv://${process.env.mongo_user}:${process.env.mongo_pass}@cluster0.q17dt2h.mongodb.net/Blog_Project`, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })
     .then(() => console.log('Database Connected'))
     .catch((err) => console.log(err));
-
 
 const Admin = require("./models/admin");
 const session = require('express-session');
@@ -30,7 +29,7 @@ app.use(express.static(path.join(__dirname, "user_assets")));
 
 app.use(session({
     name: "dhruvil",
-    secret: "dhruvil",
+    secret: `${process.env.session_secret}`,
     resave: false,
     saveUninitialized: true,
     cookie: {
