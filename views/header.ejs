@@ -113,10 +113,6 @@
                                     <a href="/admin/slider/add_slider">
                                         <i class="far fa-check-square"></i>Add silder</a>
                                 </li>
-                                <li>
-                                    <a href="/admin/slider/view_slider">
-                                        <i class="fas fa-table"></i>View slider</a>
-                                </li>
                             </ul>
                         </li>
 
@@ -313,7 +309,7 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="<%= locals.user.adminImage%>" alt="John Doe" />
+                                            <img src="<%= locals.user.adminImage%>" alt="Admin Image" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">
@@ -324,7 +320,8 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="<%= locals.user.adminImage%>" alt="John Doe" />
+                                                        <img src="<%= locals.user.adminImage%>"
+                                                            alt="<%= locals.user.adminImage%>" />
                                                     </a>
                                                 </div>
                                                 <div class="content">

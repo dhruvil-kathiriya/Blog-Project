@@ -1,0 +1,98 @@
+<%- include('header')%>
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE -->
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <form>
+                                    <input type="text" value="" name="search">
+                                    <input type="submit" value="Search">
+                                </form>
+                                <form action="/admin/deleteAll" method="post">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox" id="ckbCheckAll">
+                                                    <span class="au-checkmark">
+                                                        <button style="margin-left: 30px;" class="item"
+                                                            data-toggle="tooltip" data-placement="top" title="Delete">
+                                                            <i class="zmdi zmdi-delete"></i>
+                                                    </span>
+                                                    </button>
+                                                </label>
+
+                                            </th>
+                                            <th>name</th>
+                                            <th>email</th>
+                                            <th>subject</th>
+                                            <th>message</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if(adminData!='' ){ for(var ad of adminData){%>
+                                            <tr class="tr-shadow">
+                                                <td>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox" class="checkBoxClass" name="deleteall[]"
+                                                            value="<%= ad.id%>">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <%= ad.name%>
+                                                </td>
+                                                <td>
+                                                    <%= ad.email%>
+                                                </td>
+                                                <td>
+                                                    <%= ad.subject%>
+                                                </td>
+                                                <td>
+                                                    <%= ad.message%>
+                                                </td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Delete">
+                                                            <a href="/admin/deleteAdminData/<%= ad.id%>"><i
+                                                                    class="zmdi zmdi-delete"></i></a>
+                                                        </button>
+
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%} } else{%>
+                                                <tr>
+                                                    <td colspan="10" class="text-danger">Record Not Found</td>
+                                                </tr>
+                                                <%}%>
+
+                                                    <tr class="spacer"></tr>
+                                    </tbody>
+                                </form>
+                            </table>
+                        </div>
+                        <!-- END DATA TABLE -->
+                    </div>
+                </div>
+                <%- include('footer')%>
+
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#ckbCheckAll").click(function () {
+                                $(".checkBoxClass").attr('checked', this.checked);
+                            });
+                        });
+                    </script>
