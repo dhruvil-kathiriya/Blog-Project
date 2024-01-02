@@ -1,0 +1,147 @@
+<%- include('header')%>
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- DATA TABLE -->
+                        <div class="table-responsive table-responsive-data2">
+                            <table class="table table-data2">
+                                <form>
+
+                                    <input type="text" value="" name="search">
+                                    <input type="submit" value="Search">
+                                </form>
+
+                                <form action="/admin/subcat/deleteallsub" method="post">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <label class="au-checkbox">
+                                                    <input type="checkbox" id="ckbCheckAll">
+                                                    <span class="au-checkmark"></span>
+                                                    <button class="item" data-toggle="tooltip" data-placement="top"
+                                                        title="Delete"
+                                                        style="margin: -5px 0px 0px 25px; transform: translate(10px, -5px);">
+                                                        <i class="zmdi zmdi-delete"></i>
+                                                    </button>
+                                                </label>
+
+                                            </th>
+                                            <th>Name</th>
+                                            <th>Catagory</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <% if(adminData!='' ){ for(var ad of adminData){%>
+                                            <tr class="tr-shadow">
+                                                <td>
+                                                    <label class="au-checkbox">
+                                                        <input type="checkbox" class="checkBoxClass" name="deleteall[]"
+                                                            value="<%=ad.id%>">
+                                                        <span class="au-checkmark"></span>
+                                                    </label>
+                                                </td>
+                                                <td>
+                                                    <%= ad.tital%>
+                                                </td>
+
+                                                <td>
+                                                    <%= ad.categoryid.name%>
+                                                </td>
+                                                <td>
+                                                    <%= ad.description%>
+                                                </td>
+
+
+                                                <td><img src="<%= ad.catagoryImage%>" height="100"></td>
+                                                <td>
+                                                    <% if(ad.isActive){ %>
+                                                        <a href="/admin/subcat/setDeactivesub/<%= ad.id%>"
+                                                            class="alert alert-success">Active</a>
+                                                        <%}else{%>
+                                                            <a href="/admin/subcat/setActivesub/<%= ad.id%>"
+                                                                class="alert alert-danger">Deactive</a>
+                                                            <%}%>
+                                                </td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" type="button"
+                                                            data-placement="top" title="Edit">
+                                                            <a href="/admin/subcat/updateAdminData/<%= ad.id%>"><i
+                                                                    class="zmdi zmdi-edit"></i></a>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" type="button"
+                                                            data-placement="top" title="Delete">
+                                                            <a href="/admin/subcat/deletesubcatagorydata/<%= ad.id%>"><i
+                                                                    class="zmdi zmdi-delete"></i></a>
+                                                        </button>
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="More">
+                                                            <i class="zmdi zmdi-more"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <%} } else{%>
+                                                <tr>
+                                                    <td colspan="10" class="text-danger">No Record Found</td>
+                                                </tr>
+                                                <%}%>
+                                                    <tr>
+                                                        <td colspan="10">
+                                                            <%for(var i=0; i<totaldoc ; i++){%>
+                                                                <a href="?page=<%=i%>&search=<%=search%>">
+                                                                    <%=i+1%>
+                                                                </a>
+                                                                <%}%>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="10">
+                                                            <%var pre=parseInt(cpage)-1%>
+                                                                <% if(pre>=0){%>
+                                                                    <a href="?page=<%=pre%>">Pre</a>
+                                                                    <%}%>
+
+
+                                                                        <a href="?page=<%=page%>&search=<%=search%>">
+                                                                            <%=parseInt(page)+1%>
+                                                                        </a>
+
+                                                                        <%var nextpage=parseInt(cpage)+1%>
+                                                                            <% if(totaldoc>nextpage){%>
+                                                                                <a href="?page=<%=nextpage%>">Next</a>
+                                                                                <%}%>
+
+                                                        </td>
+
+                                                    </tr>
+                                                    <tr class="spacer"></tr>
+                                    </tbody>
+                                </form>
+                            </table>
+                        </div>
+
+                        <!-- END DATA TABLE -->
+                    </div>
+                </div>
+                <%- include('footer')%>
+
+                    <script>
+                        $(document).ready(function () {
+                            $("#ckbCheckAll").click(function () {
+                                $(".checkBoxClass").attr('checked', this.checked);
+                            });
+                        });
+                    </script>

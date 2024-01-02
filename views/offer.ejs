@@ -1,0 +1,132 @@
+<%-include('header')%>
+
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body card-block">
+                                <form action="/admin/offer/insertofferData" method="post" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Heading</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" id="text-input" name="Heading"
+                                                placeholder="Enter First Name" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Icon</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" id="email-input" name="Icon" placeholder="Icon"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="text-input" class=" form-control-label">Title</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="text" id="password-input" name="title" placeholder="Title"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="select" class=" form-control-label">Select City</label>
+                                        </div>
+                                        <% var city=["Surat","Rajkot","Vadodara","Ahmedabad"]%>
+                                            <div class="col-12 col-md-9">
+                                                <select name="city" id="select" class="form-control">
+                                                    <option value="">Select City</option>
+                                                    <%for(var v of city){%>
+                                                        <option value="<%=v%>">
+                                                            <%=v%>
+                                                        </option>
+                                                        <%}%>
+                                                </select>
+                                            </div>
+                                    </div> -->
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label class=" form-control-label">Select Gender</label>
+                                        </div>
+                                        <div class="col col-md-9">
+                                            <div class="form-check-inline form-check">
+                                                <label for="inline-radio1" class="form-check-label mx-1">
+                                                    <input type="radio" id="inline-radio1" name="gender" value="Male"
+                                                        class="form-check-input">Male
+                                                </label>
+                                                <label for="inline-radio2" class="form-check-label mx-1 ">
+                                                    <input type="radio" id="inline-radio2" name="gender" value="Female"
+                                                        class="form-check-input">Female
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label class=" form-control-label">Select Hobby</label>
+                                        </div>
+                                        <div class="col col-md-9">
+                                            <div class="form-check-inline form-check">
+                                                <label for="inline-checkbox1" class="form-check-label mx-1">
+                                                    <input type="checkbox" id="inline-checkbox1" name="hobby"
+                                                        value="Dancing" class="form-check-input">Dancing
+                                                    <label for="inline-checkbox2" class="form-check-label mx-1">
+                                                        <input type="checkbox" id="inline-checkbox2" name="hobby"
+                                                            value="Singing" class="form-check-input">Singing
+                                                    </label>
+                                                    <label for="inline-checkbox3" class="form-check-label mx-1">
+                                                        <input type="checkbox" id="inline-checkbox3" name="hobby"
+                                                            value="Reading" class="form-check-input">Reading
+                                                    </label>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="textarea-input" class=" form-control-label">Discription</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <textarea name="discription" id="textarea-input" rows="6"
+                                                placeholder="Content..." class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row form-group">
+                                        <div class="col col-md-3">
+                                            <label for="file-input" class=" form-control-label">File input</label>
+                                        </div>
+                                        <div class="col-12 col-md-9">
+                                            <input type="file" id="file-input" name="adminImage"
+                                                class="form-control-file">
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row form-group">
+                                    <div class="col col-md-3">
+                                        <label for="file-multiple-input" class=" form-control-label">Multiple File input</label>
+                                    </div>
+                                    <div class="col-12 col-md-9">
+                                        <input type="file" id="file-multiple-input" name="file-multiple-input" multiple="" class="form-control-file">
+                                    </div>
+                                </div> -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            <i class="fa fa-dot-circle-o"></i> Submit
+                                        </button>
+                                        <button type="reset" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-ban"></i> Reset
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%-include('footer')%>
