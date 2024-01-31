@@ -8,13 +8,10 @@
                         <!-- DATA TABLE -->
                         <div class="table-responsive table-responsive-data2">
                             <table class="table table-data2">
-
                                 <form>
-
                                     <input type="text" value="" name="search">
                                     <input type="submit" value="Search">
                                 </form>
-
                                 <form action="/admin/deleteall" method="post">
                                     <thead>
                                         <tr>
@@ -42,7 +39,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         <% if(adminData!='' ){ for(var ad of adminData){%>
                                             <tr class="tr-shadow">
                                                 <td>
@@ -141,8 +137,6 @@
                                 </form>
                             </table>
                         </div>
-
-                        <!-- END DATA TABLE -->
                     </div>
                 </div>
                 <%- include('footer')%>

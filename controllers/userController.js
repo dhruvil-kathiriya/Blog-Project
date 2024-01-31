@@ -1,99 +1,96 @@
-const slider = require('../models/slider');
-const post = require('../models/post')
-const comment = require('../models/comment')
-const catagory = require('../models/catagory')
-const subcatagory = require('../models/subcatagory')
-const offermodel = require('../models/offermodel');
-const contact = require('../models/contact');
+const slider = require("../models/slider");
+const post = require("../models/post");
+const comment = require("../models/comment");
+const catagory = require("../models/catagory");
+const subcatagory = require("../models/subcatagory");
+const offermodel = require("../models/offermodel");
+const contact = require("../models/contact");
 const nodemailer = require("nodemailer");
 module.exports.home = async (req, res) => {
-    let sliderData = await slider.find({})
-    let postdata = await post.find({ isActive: true })
-    let offerdata = await offermodel.find({});
-    return res.render('userpanel/home', {
-        'sliderData': sliderData,
-        'offerview': offerdata,
-        'postdata': postdata
-    });
-}
+  let sliderData = await slider.find({});
+  let postdata = await post.find({ isActive: true });
+  let offerdata = await offermodel.find({});
+  return res.render("userpanel/home", {
+    sliderData: sliderData,
+    offerview: offerdata,
+    postdata: postdata,
+  });
+};
 
 module.exports.viewblog = async (req, res) => {
-    let blogId = req.params.id;
-    let data = await post.findOne({ _id: blogId });
-    let cdata = await comment.find({ postid: blogId, isActive: true });
-    var cc = cdata.length;
-    let allpostdata = await post.find({});
-    var ids = [];
-    allpostdata.map((v, i) => {
-        ids.push(v.id)
-    })
-    var next;
-    for (var i = 0; i < ids.length; i++) {
-        if (ids[i] === req.params.id) {
-            next = i;
-            break;
-        }
+  let blogId = req.params.id;
+  let data = await post.findOne({ _id: blogId });
+  let cdata = await comment.find({ postid: blogId, isActive: true });
+  var cc = cdata.length;
+  let allpostdata = await post.find({});
+  var ids = [];
+  allpostdata.map((v, i) => {
+    ids.push(v.id);
+  });
+  var next;
+  for (var i = 0; i < ids.length; i++) {
+    if (ids[i] === req.params.id) {
+      next = i;
+      break;
     }
-    let recentpost = await post.find({}).sort({ "_id": -1 }).limit(3);
-    return res.render('userpanel/viewblog', {
-        'blogdata': data,
-        'comm': cdata,
-        'cc': cc,
-        'allids': ids,
-        'cp': next,
-        'recentpost': recentpost
-    })
-}
+  }
+  let recentpost = await post.find({}).sort({ _id: -1 }).limit(3);
+  return res.render("userpanel/viewblog", {
+    blogdata: data,
+    comm: cdata,
+    cc: cc,
+    allids: ids,
+    cp: next,
+    recentpost: recentpost,
+  });
+};
 
 module.exports.addcomment = async (req, res) => {
-    let imgPath = '';
-    if (req.file) {
-        imgPath = comment.commentImgPath + "/" + req.file.filename;
-    }
-    req.body.userImage = imgPath;
-    req.body.isActive = false;
-    req.body.create_date = new Date().toLocaleString();
-    req.body.update_date = new Date().toLocaleString();
-    await comment.create(req.body);
-    return res.redirect('back')
-}
+  let imgPath = "";
+  if (req.file) {
+    imgPath = comment.commentImgPath + "/" + req.file.filename;
+  }
+  req.body.userImage = imgPath;
+  req.body.isActive = false;
+  req.body.create_date = new Date().toLocaleString();
+  req.body.update_date = new Date().toLocaleString();
+  await comment.create(req.body);
+  return res.redirect("back");
+};
 
 module.exports.catagory = async (req, res) => {
-    let cdata = await catagory.find({ isActive: true });
-    let subdata = await subcatagory.find({ isActive: true });
-    return res.render('userpanel/catagory', {
-        'cdata': cdata,
-        'subdata': subdata
-    });
-}
-
+  let cdata = await catagory.find({ isActive: true });
+  let subdata = await subcatagory.find({ isActive: true });
+  return res.render("userpanel/catagory", {
+    cdata: cdata,
+    subdata: subdata,
+  });
+};
 
 module.exports.contact = async (req, res) => {
-    return res.render('userpanel/contact');
-}
-
+  return res.render("userpanel/contact");
+};
 
 module.exports.addcontactdeails = async (req, res) => {
-    var comm = true;
-    if (comm) {
-        const transporter = nodemailer.createTransport({
-            host: "smtp.gmail.com",
-            port: 465,
-            secure: true,
-            auth: {
-                // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-                user: "clownfish156@gmail.com",
-                pass: "lfvcykzhqjeeehsd",
-            },
-        });
+  var comm = true;
+  if (comm) {
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: "clownfish156@gmail.com",
+        pass: "lfvcykzhqjeeehsd",
+      },
+    });
 
-        let user = req.body.name;
-        const info = await transporter.sendMail({
-            from: 'clownfish156@gmail.com', // sender address
-            to: `${req.body.email}`, // list of receivers
-            subject: "Contact", // Subject line
-            text: "Hello User ", // plain text body
-            html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    let user = req.body.name;
+    const info = await transporter.sendMail({
+      from: "clownfish156@gmail.com", // sender address
+      to: `${req.body.email}`, // list of receivers
+      subject: "Contact", // Subject line
+      text: "Hello User ", // plain text body
+      html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
             <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
             
             <head>
@@ -205,13 +202,11 @@ module.exports.addcontactdeails = async (req, res) => {
             </body>
             
             </html>`, // html body
-        });
-
-    }
-    req.body.isActive = true;
-    req.body.create_date = new Date().toLocaleString();
-    req.body.update_date = new Date().toLocaleString();
-    await contact.create(req.body);
-    return res.redirect('back')
-}
-
+    });
+  }
+  req.body.isActive = true;
+  req.body.create_date = new Date().toLocaleString();
+  req.body.update_date = new Date().toLocaleString();
+  await contact.create(req.body);
+  return res.redirect("back");
+};
